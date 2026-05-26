@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>송원덕 ♥ 김나현 결혼합니다</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;overflow-x:hidden}
+.page{width:100%;max-width:480px;margin:0 auto;background:#fdfcf9}
+#intro{position:fixed;inset:0;z-index:999;background:rgba(26,24,20,0.5);display:flex;align-items:center;justify-content:center;flex-direction:column}
+.intro-overlay{position:relative;z-index:2;text-align:center;color:#fdfcf9;opacity:0;transition:opacity 1s}
+.intro-overlay.show{opacity:1}
+.intro-name{font-family:'Cormorant Garamond',serif;font-size:38px;letter-spacing:6px;font-weight:300;line-height:1.4}
+.intro-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:rgba(255,255,255,0.6);margin:4px 0}
+.intro-date{font-size:11px;letter-spacing:4px;color:rgba(255,255,255,0.55);margin-top:14px}
+.intro-skip{position:absolute;bottom:32px;right:24px;z-index:3;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;cursor:pointer;border:none;background:none;font-family:'Noto Serif KR',serif}
+#intro.fade-out{animation:introFade 1.2s ease forwards}
+@keyframes introFade{to{opacity:0;pointer-events:none}}
+.badge{font-family:'Cormorant Garamond',serif;font-size:10.5px;letter-spacing:5px;color:#8a8070;text-align:center;padding-top:40px}
+.divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0}
+.divider-line{width:44px;height:0.5px;background:#c8c0a8}
+.divider-dot{width:3.5px;height:3.5px;border-radius:50%;background:#c8c0a8}
+.section-title{text-align:center;font-size:10.5px;letter-spacing:4px;color:#9a9080;margin:32px 0 16px}
+.section-sep{margin:28px 24px;height:0.5px;background:#e8e4dc}
+.names{text-align:center;padding:22px 20px 0}
+.name-kr{font-size:33px;font-weight:400;color:#3d3830;letter-spacing:6px;line-height:1.3}
+.name-en{font-size:10px;letter-spacing:6px;color:#a09880;margin-top:5px}
+.amp{font-family:'Cormorant Garamond',serif;font-size:34px;color:#c0b8a0;margin:10px 0;font-style:italic}
+.countdown{display:flex;justify-content:center;margin:22px 28px 0;border:0.5px solid #e0dbd0;border-radius:10px;overflow:hidden;background:#faf9f5}
+.cd-item{flex:1;text-align:center;padding:16px 6px;position:relative}
+.cd-item+.cd-item::before{content:'';position:absolute;left:0;top:18%;height:64%;width:0.5px;background:#e0dbd0}
+.cd-num{font-family:'Cormorant Garamond',serif;font-size:30px;color:#3d3830;line-height:1}
+.cd-label{font-size:9px;color:#a09880;margin-top:5px;letter-spacing:1.5px}
+.invite-text{text-align:center;padding:26px 38px;line-height:2.6;font-size:13px;color:#6a6050;font-weight:300}
+.date-box{text-align:center;padding:22px 28px;border-top:0.5px solid #e0dbd0;border-bottom:0.5px solid #e0dbd0;margin:0 28px}
+.date-main{font-family:'Cormorant Garamond',serif;font-size:25px;letter-spacing:4px;color:#3d3830;font-weight:300}
+.date-sub{font-size:11px;color:#a09880;margin-top:5px;letter-spacing:3px}
+.date-time{font-size:13px;color:#6a6050;margin-top:10px;letter-spacing:1px}
+.venue-box{text-align:center;margin-top:22px;padding:0 24px}
+.venue-name{font-size:16px;color:#3d3830;letter-spacing:2px;font-weight:500}
+.venue-addr{font-size:12px;color:#a09880;margin-top:7px;line-height:2.1}
+.parents{margin:26px 24px 0;padding:20px 16px;border-top:0.5px solid #e0dbd0;border-bottom:0.5px solid #e0dbd0}
+.parents-row{display:flex;justify-content:space-between;text-align:center;gap:12px}
+.parent-side{flex:1}
+.parent-label{font-size:10px;color:#a09880;letter-spacing:3px;margin-bottom:10px}
+.parent-name{font-size:12px;color:#6a6050;line-height:2.3}
+.video-wrap{margin:0 24px;border-radius:10px;overflow:hidden;border:0.5px solid #e0dbd0;background:#f0ede6;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.play-ring{width:48px;height:48px;border-radius:50%;border:1px solid #c8c0a8;display:flex;align-items:center;justify-content:center}
+.play-ring::after{content:'';border-left:14px solid #b0a890;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.video-label{font-size:11px;letter-spacing:2px;color:#b0a890}
+.gallery-grid{margin:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.g-thumb{aspect-ratio:1;border-radius:4px;overflow:hidden;cursor:pointer;background:#f0ede6;display:flex;align-items:center;justify-content:center;transition:opacity .18s}
+.g-thumb:hover{opacity:0.82}
+.g-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.g-num{font-size:11px;color:#c0b8a8;font-family:'Cormorant Garamond',serif}
+.lb{position:fixed;inset:0;background:rgba(15,13,10,0.94);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center}
+.lb.show{display:flex}
+.lb-img{width:88vw;max-width:420px;aspect-ratio:1;border-radius:8px;overflow:hidden;background:#1e1c18;display:flex;align-items:center;justify-content:center}
+.lb-img img{width:100%;height:100%;object-fit:cover}
+.lb-ph{color:#5a5248;font-size:13px;letter-spacing:1px;font-family:'Cormorant Garamond',serif}
+.lb-nav{display:flex;align-items:center;gap:28px;margin-top:18px}
+.lb-btn{width:42px;height:42px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.2);background:none;color:rgba(255,255,255,0.7);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb-cnt{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;min-width:48px;text-align:center}
+.lb-x{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.18);background:none;color:rgba(255,255,255,0.5);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.map-wrap{margin:0 24px;border-radius:10px;overflow:hidden;border:0.5px solid #e0dbd0}
+.map-info{background:#faf9f5;padding:16px;border-top:0.5px solid #e0dbd0}
+.map-row{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:#6a6050;line-height:1.8;align-items:flex-start}
+.map-btn{display:block;margin:12px 24px 0;padding:13px;text-align:center;background:#3d3830;color:#fdfcf9;border-radius:8px;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;border:none;font-family:'Noto Serif KR',serif;width:calc(100% - 48px)}
+.msg-sec{margin:0 24px}
+.msg-form{background:#faf9f5;border:0.5px solid #e0dbd0;border-radius:10px;padding:18px;margin-bottom:14px}
+.f-input{width:100%;border:0.5px solid #e0dbd0;border-radius:6px;padding:10px 12px;font-family:'Noto Serif KR',serif;font-size:12.5px;color:#3d3830;background:#fdfcf9;margin-bottom:8px;outline:none}
+.f-area{width:100%;border:0.5px solid #e0dbd0;border-radius:6px;padding:10px 12px;font-family:'Noto Serif KR',serif;font-size:12.5px;color:#3d3830;background:#fdfcf9;height:78px;resize:none;outline:none;margin-bottom:10px}
+.f-btn{width:100%;padding:12px;background:#3d3830;color:#fdfcf9;border:none;border-radius:6px;font-family:'Noto Serif KR',serif;font-size:12.5px;letter-spacing:1.5px;cursor:pointer}
+.acc-btn{display:block;width:calc(100% - 48px);margin:0 24px;padding:14px;text-align:center;background:#fdfcf9;border:0.5px solid #c8c0a8;border-radius:8px;color:#3d3830;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;font-family:'Noto Serif KR',serif}
+.pop-ov{position:fixed;inset:0;background:rgba(40,35,28,0.38);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.pop-ov.show{display:flex}
+.pop{background:#fdfcf9;border-radius:18px 18px 0 0;padding:28px 22px 44px;width:100%;max-width:480px;animation:slideUp .26s ease;position:relative;max-height:85vh;overflow-y:auto}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.pop-title{text-align:center;font-size:14px;color:#3d3830;letter-spacing:2px;margin-bottom:18px}
+.pop-x{position:absolute;top:14px;right:18px;font-size:17px;color:#a09880;cursor:pointer;background:none;border:none}
+.a-card{background:#faf9f5;border:0.5px solid #e0dbd0;border-radius:10px;padding:16px;margin-bottom:9px}
+.a-who{font-size:10px;color:#a09880;letter-spacing:2px;margin-bottom:6px}
+.a-bank{font-size:11.5px;color:#6a6050;margin-bottom:3px}
+.a-num{font-size:15px;color:#3d3830;letter-spacing:1px;font-weight:500}
+.a-name{font-size:11px;color:#a09880;margin-top:3px}
+.cp-btn{float:right;font-size:11px;color:#6a6050;border:0.5px solid #c8c0a8;border-radius:20px;padding:4px 11px;cursor:pointer;background:#fdfcf9;font-family:'Noto Serif KR',serif}
+.footer{text-align:center;padding:32px 0 44px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;color:#c0b8a0}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:#3d3830;color:#fdfcf9;padding:10px 22px;border-radius:20px;font-size:12px;opacity:0;transition:opacity .3s;z-index:300;white-space:nowrap}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(26,24,20,0.5) 0%,rgba(46,40,32,0.5) 100%)"></div>
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-name">송원덕<br>김나현</div>
+    <div class="intro-amp">&amp;</div>
+    <div class="intro-date">2026 · 11 · 01 &nbsp;|&nbsp; 더 컨벤션 반포</div>
+  </div>
+  <button class="intro-skip" onclick="skipIntro()">SKIP ›</button>
+</div>
+
+<div class="page" id="mainPage" style="opacity:0;transition:opacity 1s">
+
+  <div class="badge">WEDDING INVITATION</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+  <div class="names">
+    <div class="name-kr">송원덕</div>
+    <div class="name-en">SONG WONDUCK</div>
+    <div class="amp">&amp;</div>
+    <div class="name-kr">김나현</div>
+    <div class="name-en">KIM NAHYEON</div>
+  </div>
+
+  <div class="countdown">
+    <div class="cd-item"><div class="cd-num" id="cd-d">--</div><div class="cd-label">DAYS</div></div>
+    <div class="cd-item"><div class="cd-num" id="cd-h">--</div><div class="cd-label">HOURS</div></div>
+    <div class="cd-item"><div class="cd-num" id="cd-m">--</div><div class="cd-label">MIN</div></div>
+    <div class="cd-item"><div class="cd-num" id="cd-s">--</div><div class="cd-label">SEC</div></div>
+  </div>
+
+  <div class="invite-text">
+    서로가 서로의 곁에 있어<br>더 빛나는 하루를 만들어갑니다<br><br>
+    두 사람이 사랑으로 하나 되는 날<br>함께 자리해 주시면 감사하겠습니다
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+  <div class="date-box" style="margin-top:18px">
+    <div class="date-main">2026 · 11 · 01</div>
+    <div class="date-sub">SUNDAY</div>
+    <div class="date-time">오후 12시 30분</div>
+  </div>
+
+  <div class="venue-box" style="margin-top:20px">
+    <div class="venue-name">더 컨벤션 반포</div>
+    <div class="venue-addr">서울특별시 서초구 사평대로 108, 2층<br>지하철 9호선 신반포역 4번 출구</div>
+  </div>
+
+  <div class="parents">
+    <div class="parents-row">
+      <div class="parent-side">
+        <div class="parent-label">신랑측</div>
+        <div class="parent-name">아버지 김○○<br>어머니 박○○</div>
+      </div>
+      <div style="width:0.5px;background:#e0dbd0;flex-shrink:0"></div>
+      <div class="parent-side">
+        <div class="parent-label">신부측</div>
+        <div class="parent-name">아버지 이○○<br>어머니 최○○</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep"></div>
+
+  <div class="section-title">OUR STORY</div>
+  <div class="video-wrap">
+    <div class="play-ring"></div>
+    <div class="video-label">인사 영상을 넣어주세요</div>
+  </div>
+
+  <div class="section-sep"></div>
+
+  <div class="section-title">GALLERY</div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+
+  <div class="section-sep"></div>
+
+  <div class="section-title">LOCATION</div>
+  <div class="map-wrap">
+    <svg viewBox="0 0 380 260" style="width:100%;display:block;background:#f8f7f2">
+      <rect x="0" y="66" width="380" height="22" fill="#e0dbd0"/>
+      <rect x="0" y="156" width="380" height="22" fill="#e0dbd0"/>
+      <rect x="276" y="0" width="22" height="260" fill="#e0dbd0"/>
+      <text x="14" y="62" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">신반포로</text>
+      <text x="14" y="152" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">사평대로</text>
+      <text x="302" y="250" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">반포대로</text>
+      <text x="320" y="30" font-family="sans-serif" font-size="9.5" fill="#7a7060" text-anchor="middle" font-weight="bold">신세계백화점</text>
+      <text x="320" y="44" font-family="sans-serif" font-size="8.5" fill="#9a9080" text-anchor="middle">센트럴시티 · 터미널</text>
+      <text x="320" y="200" font-family="sans-serif" font-size="9.5" fill="#7a7060" text-anchor="middle" font-weight="bold">서울성모병원</text>
+      <circle cx="80" cy="77" r="22" fill="#3d3830"/>
+      <text x="80" y="72" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">9호선</text>
+      <text x="80" y="84" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">4번출구</text>
+      <text x="80" y="108" font-family="sans-serif" font-size="10.5" fill="#3d3830" text-anchor="middle" font-weight="bold">신반포역</text>
+      <text x="80" y="122" font-family="sans-serif" font-size="8.5" fill="#6a9abf" text-anchor="middle">셔틀 7분 간격</text>
+      <circle cx="290" cy="77" r="22" fill="#3d3830"/>
+      <text x="290" y="72" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">3·7·9</text>
+      <text x="290" y="84" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">호선</text>
+      <text x="290" y="108" font-family="sans-serif" font-size="10.5" fill="#3d3830" text-anchor="middle" font-weight="bold">고속터미널역</text>
+      <text x="290" y="122" font-family="sans-serif" font-size="8.5" fill="#888070" text-anchor="middle">도보 5분</text>
+      <path d="M80,228 C66,210 56,197 56,184 C56,168 67,158 80,158 C93,158 104,168 104,184 C104,197 94,210 80,228Z" fill="#3d3830"/>
+      <circle cx="80" cy="183" r="14" fill="#fdfcf9"/>
+      <text x="80" y="242" font-family="sans-serif" font-size="11" fill="#3d3830" text-anchor="middle" font-weight="bold">더 컨벤션 반포</text>
+    </svg>
+    <div class="map-info">
+      <div class="map-row"><span>🚇</span><span><b>지하철</b><br>3·7·9호선 고속터미널역 → 도보 5분<br>9호선 신반포역 4번 출구 → 도보 5분</span></div>
+      <div class="map-row"><span>🚌</span><span><b>셔틀버스 (무료)</b><br>신반포역 4번 출구 앞 탑승 · 7분 간격<br><span style="font-size:11px;color:#a09880">※ 도보가 멀어 셔틀 이용 추천</span></span></div>
+      <div class="map-row"><span>🚗</span><span><b>자가용</b><br>서울 서초구 사평대로 108 · 건물 내 주차 가능</span></div>
+      <div class="map-row" style="margin:0"><span>🏧</span><span><b>ATM</b> · 건물 내 이용 가능</span></div>
+    </div>
+  </div>
+  <button class="map-btn" onclick="openNaver()">네이버 지도로 보기</button>
+
+  <div class="section-sep"></div>
+
+  <div class="section-title">WISHES</div>
+  <div class="msg-sec">
+    <div class="msg-form">
+      <input class="f-input" id="msgName" type="text" placeholder="이름" maxlength="20"/>
+      <textarea class="f-area" id="msgText" placeholder="축하 메시지를 남겨주세요" maxlength="200"></textarea>
+      <button class="f-btn" onclick="submitMsg()">메시지 전하기</button>
+    </div>
+    <div id="msgThanks" style="display:none;text-align:center;padding:20px;font-size:13px;color:#6a6050;line-height:2.2;font-weight:300">
+      두 사람을 위한 소중한 메시지<br>감사합니다
+    </div>
+  </div>
+
+  <div class="section-sep"></div>
+
+  <button class="acc-btn" onclick="openAcc()">마음 전하기 · 계좌번호</button>
+  <div class="footer">WITH LOVE</div>
+</div>
+
+<div class="lb" id="lb">
+  <button class="lb-x" onclick="closeLb()">✕</button>
+  <div class="lb-img" id="lbImg"></div>
+  <div class="lb-nav">
+    <button class="lb-btn" onclick="lbMove(-1)">&#8592;</button>
+    <div class="lb-cnt" id="lbCnt">1 / 21</div>
+    <button class="lb-btn" onclick="lbMove(1)">&#8594;</button>
+  </div>
+</div>
+
+<div class="pop-ov" id="accPop" onclick="closeAccIfOv(event)">
+  <div class="pop">
+    <button class="pop-x" onclick="closeAcc()">✕</button>
+    <div class="pop-title">마음 전하기</div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑</div><div class="a-bank">카카오뱅크</div><div class="a-num">3333-01-2345678</div><div class="a-name">송원덕</div></div><button class="cp-btn" onclick="copyAcc('3333-01-2345678','신랑')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 어머니</div><div class="a-bank">국민은행</div><div class="a-num">123-456-78-901234</div><div class="a-name">박○○</div></div><button class="cp-btn" onclick="copyAcc('123-456-78-901234','신랑 어머니')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 아버지</div><div class="a-bank">신한은행</div><div class="a-num">110-234-567890</div><div class="a-name">송○○</div></div><button class="cp-btn" onclick="copyAcc('110-234-567890','신랑 아버지')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부</div><div class="a-bank">국민은행</div><div class="a-num">646201-04-189177</div><div class="a-name">김나현</div></div><button class="cp-btn" onclick="copyAcc('646201-04-189177','신부')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부 어머니</div><div class="a-bank">하나은행</div><div class="a-num">123-456789-01234</div><div class="a-name">최○○</div></div><button class="cp-btn" onclick="copyAcc('123-456789-01234','신부 어머니')">복사</button></div></div>
+    <p style="text-align:center;font-size:11px;color:#a09880;margin-top:14px;line-height:2">두 사람의 새 출발을 응원해 주셔서<br>감사합니다</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const WEDDING = new Date('2026-11-01T12:30:00+09:00');
+
+setTimeout(()=>document.getElementById('introOverlay').classList.add('show'), 600);
+setTimeout(()=>endIntro(), 5500);
+function endIntro(){
+  const i=document.getElementById('intro');
+  i.classList.add('fade-out');
+  document.getElementById('mainPage').style.opacity='1';
+  setTimeout(()=>{i.style.display='none';},1200);
+}
+function skipIntro(){endIntro();}
+
+function tick(){
+  const diff=WEDDING-new Date();
+  if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+const PHOTOS=Array.from({length:21},(_,i)=>null);
+function buildGallery(){
+  const g=document.getElementById('galleryGrid');
+  g.innerHTML='';
+  PHOTOS.forEach((src,i)=>{
+    const d=document.createElement('div');
+    d.className='g-thumb';
+    d.onclick=()=>openLb(i);
+    if(src){const im=document.createElement('img');im.src=src;im.alt='사진'+(i+1);d.appendChild(im);}
+    else{d.style.background='#ede9e0';d.innerHTML='<span class="g-num">'+(i+1)+'</span>';}
+    g.appendChild(d);
+  });
+}
+buildGallery();
+
+let lbIdx=0;
+function openLb(i){lbIdx=i;renderLb();document.getElementById('lb').classList.add('show');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lb').classList.remove('show');document.body.style.overflow='';}
+function lbMove(d){lbIdx=(lbIdx+d+PHOTOS.length)%PHOTOS.length;renderLb();}
+function renderLb(){
+  const w=document.getElementById('lbImg');
+  const src=PHOTOS[lbIdx];
+  w.innerHTML=src?'<img src="'+src+'" alt="사진'+(lbIdx+1)+'">':`<div class="lb-ph">사진 ${lbIdx+1}</div>`;
+  document.getElementById('lbCnt').textContent=(lbIdx+1)+' / '+PHOTOS.length;
+}
+let tsX=0;
+document.getElementById('lb').addEventListener('touchstart',e=>tsX=e.touches[0].clientX,{passive:true});
+document.getElementById('lb').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsX;if(Math.abs(dx)>40)lbMove(dx<0?1:-1);});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('show'))return;
+  if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='ArrowRight')lbMove(1);if(e.key==='Escape')closeLb();
+});
+
+async function submitMsg(){
+  const name=document.getElementById('msgName').value.trim();
+  const msg=document.getElementById('msgText').value.trim();
+  if(!name||!msg){showToast('이름과 메시지를 입력해주세요');return;}
+  const btn=document.querySelector('.f-btn');
+  btn.textContent='전송 중...';btn.disabled=true;
+  try{await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({name,message:msg})});}catch(e){}
+  document.querySelector('.msg-form').style.display='none';
+  document.getElementById('msgThanks').style.display='block';
+  btn.textContent='메시지 전하기';btn.disabled=false;
+}
+
+function openAcc(){document.getElementById('accPop').classList.add('show');document.body.style.overflow='hidden';}
+function closeAccIfOv(e){if(e.target===document.getElementById('accPop'))closeAcc();}
+function closeAcc(){document.getElementById('accPop').classList.remove('show');document.body.style.overflow='';}
+function copyAcc(num,who){
+  if(navigator.clipboard){navigator.clipboard.writeText(num).then(()=>showToast(who+' 계좌번호 복사됨'));}
+  else{var t=document.createElement('textarea');t.value=num;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast(who+' 계좌번호 복사됨');}
+}
+function openNaver(){window.open('https://map.naver.com/v5/search/더컨벤션반포','_blank');}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+</script>
+</body>
+</html>
