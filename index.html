@@ -57,8 +57,8 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .g-num{font-size:11px;color:#c0b8a8;font-family:'Cormorant Garamond',serif}
 .lb{position:fixed;inset:0;background:rgba(15,13,10,0.94);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center}
 .lb.show{display:flex}
-.lb-img{width:88vw;max-width:420px;aspect-ratio:1;border-radius:8px;overflow:hidden;background:#1e1c18;display:flex;align-items:center;justify-content:center}
-.lb-img img{width:100%;height:100%;object-fit:cover}
+.lb-img{width:88vw;max-width:420px;max-height:76vh;border-radius:8px;overflow:hidden;background:#1e1c18;display:flex;align-items:center;justify-content:center}
+.lb-img img{max-width:100%;max-height:76vh;width:auto;height:auto;object-fit:contain;display:block}
 .lb-ph{color:#5a5248;font-size:13px;letter-spacing:1px;font-family:'Cormorant Garamond',serif}
 .lb-nav{display:flex;align-items:center;gap:28px;margin-top:18px}
 .lb-btn{width:42px;height:42px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.2);background:none;color:rgba(255,255,255,0.7);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -238,7 +238,7 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
     <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 어머니</div><div class="a-bank">국민은행</div><div class="a-num">123-456-78-901234</div><div class="a-name">박○○</div></div><button class="cp-btn" onclick="copyAcc('123-456-78-901234','신랑 어머니')">복사</button></div></div>
     <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 아버지</div><div class="a-bank">신한은행</div><div class="a-num">110-234-567890</div><div class="a-name">송○○</div></div><button class="cp-btn" onclick="copyAcc('110-234-567890','신랑 아버지')">복사</button></div></div>
     <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부</div><div class="a-bank">국민은행</div><div class="a-num">646201-04-189177</div><div class="a-name">김나현</div></div><button class="cp-btn" onclick="copyAcc('646201-04-189177','신부')">복사</button></div></div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부 어머니</div><div class="a-bank">하나은행</div><div class="a-num">123-456789-01234</div><div class="a-name">최○○</div></div><button class="cp-btn" onclick="copyAcc('123-456789-01234','신부 어머니')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부 어머니</div><div class="a-bank">대구은행</div><div class="a-num">023-08-180199</div><div class="a-name">최○○</div></div><button class="cp-btn" onclick="copyAcc('023-08-180199','신부 어머니')">복사</button></div></div>
     <p style="text-align:center;font-size:11px;color:#a09880;margin-top:14px;line-height:2">두 사람의 새 출발을 응원해 주셔서<br>감사합니다</p>
   </div>
 </div>
@@ -246,7 +246,7 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 <div class="toast" id="toast"></div>
 
 <script>
-const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhFKxlHAJod_HBqarvKMyUb_hOx6YcTk59xuAYOQ04XvTH1dzK8rdfe71nSULlltkU/exec';
 const WEDDING = new Date('2026-11-01T12:30:00+09:00');
 
 const introVideo=document.getElementById('introVideo');
@@ -264,6 +264,7 @@ function endIntro(){
   const i=document.getElementById('intro');
   i.classList.add('fade-out');
   document.getElementById('mainPage').style.opacity='1';
+  window.scrollTo(0,0);
   setTimeout(()=>{i.style.display='none';},1200);
 }
 function skipIntro(){
