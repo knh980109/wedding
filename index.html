@@ -5,12 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>송원덕 ♥ 김나현 결혼합니다</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+Display:wght@200&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;overflow-x:hidden}
 .page{width:100%;max-width:480px;margin:0 auto;background:#fdfcf9}
-#intro{position:fixed;inset:0;z-index:999;background:rgba(26,24,20,0.5);display:flex;align-items:center;justify-content:center;flex-direction:column}
-.intro-overlay{position:relative;z-index:2;text-align:center;color:#fdfcf9;opacity:0;transition:opacity 1s}
+#intro{position:fixed;inset:0;z-index:999;background:#f7f5f0;display:flex;align-items:center;justify-content:center}
+.intro-inner{position:relative;width:100%;max-width:480px;height:100%;margin:0 auto;overflow:hidden;background:#1a1814;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.intro-dim{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(26,24,20,0.15) 0%,rgba(26,24,20,0.55) 100%);transition:background 1.8s ease}
+.intro-dim.show{background:linear-gradient(160deg,rgba(18,16,12,0.6) 0%,rgba(18,16,12,0.82) 100%)}
+.intro-overlay{position:relative;z-index:2;text-align:center;color:#fdfcf9;opacity:0;transition:opacity 1.2s}
 .intro-overlay.show{opacity:1}
 .intro-name{font-family:'Cormorant Garamond',serif;font-size:38px;letter-spacing:6px;font-weight:300;line-height:1.4}
 .intro-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:rgba(255,255,255,0.6);margin:4px 0}
@@ -31,11 +35,11 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .countdown{display:flex;justify-content:center;margin:22px 28px 0;border:0.5px solid #e0dbd0;border-radius:10px;overflow:hidden;background:#faf9f5}
 .cd-item{flex:1;text-align:center;padding:16px 6px;position:relative}
 .cd-item+.cd-item::before{content:'';position:absolute;left:0;top:18%;height:64%;width:0.5px;background:#e0dbd0}
-.cd-num{font-family:'Cormorant Garamond',serif;font-size:30px;color:#3d3830;line-height:1}
+.cd-num{font-family:'Noto Serif Display',serif;font-weight:200;font-size:30px;color:#3d3830;line-height:1}
 .cd-label{font-size:9px;color:#a09880;margin-top:5px;letter-spacing:1.5px}
 .invite-text{text-align:center;padding:26px 38px;line-height:2.6;font-size:13px;color:#6a6050;font-weight:300}
 .date-box{text-align:center;padding:22px 28px;border-top:0.5px solid #e0dbd0;border-bottom:0.5px solid #e0dbd0;margin:0 28px}
-.date-main{font-family:'Cormorant Garamond',serif;font-size:25px;letter-spacing:4px;color:#3d3830;font-weight:300}
+.date-main{font-family:'Noto Serif Display',serif;font-size:25px;letter-spacing:4px;color:#3d3830;font-weight:200}
 .date-sub{font-size:11px;color:#a09880;margin-top:5px;letter-spacing:3px}
 .date-time{font-size:13px;color:#6a6050;margin-top:10px;letter-spacing:1px}
 .venue-box{text-align:center;margin-top:22px;padding:0 24px}
@@ -46,10 +50,6 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .parent-side{flex:1}
 .parent-label{font-size:10px;color:#a09880;letter-spacing:3px;margin-bottom:10px}
 .parent-name{font-size:12px;color:#6a6050;line-height:2.3}
-.video-wrap{margin:0 24px;border-radius:10px;overflow:hidden;border:0.5px solid #e0dbd0;background:#f0ede6;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
-.play-ring{width:48px;height:48px;border-radius:50%;border:1px solid #c8c0a8;display:flex;align-items:center;justify-content:center}
-.play-ring::after{content:'';border-left:14px solid #b0a890;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
-.video-label{font-size:11px;letter-spacing:2px;color:#b0a890}
 .gallery-grid{margin:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .g-thumb{aspect-ratio:1;border-radius:4px;overflow:hidden;cursor:pointer;background:#f0ede6;display:flex;align-items:center;justify-content:center;transition:opacity .18s}
 .g-thumb:hover{opacity:0.82}
@@ -94,13 +94,16 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 <body>
 
 <div id="intro">
-  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(26,24,20,0.5) 0%,rgba(46,40,32,0.5) 100%)"></div>
-  <div class="intro-overlay" id="introOverlay">
-    <div class="intro-name">송원덕<br>김나현</div>
-    <div class="intro-amp">&amp;</div>
-    <div class="intro-date">2026 · 11 · 01 &nbsp;|&nbsp; 더 컨벤션 반포</div>
+  <div class="intro-inner">
+    <video id="introVideo" class="intro-video" src="인사.mp4" autoplay muted playsinline webkit-playsinline="true"></video>
+    <div class="intro-dim" id="introDim"></div>
+    <div class="intro-overlay" id="introOverlay">
+      <div class="intro-name">송원덕<br>김나현</div>
+      <div class="intro-amp">&amp;</div>
+      <div class="intro-date">2026 · 11 · 01 &nbsp;|&nbsp; 더 컨벤션 반포</div>
+    </div>
+    <button class="intro-skip" onclick="skipIntro()">SKIP ›</button>
   </div>
-  <button class="intro-skip" onclick="skipIntro()">SKIP ›</button>
 </div>
 
 <div class="page" id="mainPage" style="opacity:0;transition:opacity 1s">
@@ -145,22 +148,14 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
     <div class="parents-row">
       <div class="parent-side">
         <div class="parent-label">신랑측</div>
-        <div class="parent-name">아버지 김○○<br>어머니 박○○</div>
+        <div class="parent-name">아버지 송용석<br>어머니 박윤주</div>
       </div>
       <div style="width:0.5px;background:#e0dbd0;flex-shrink:0"></div>
       <div class="parent-side">
         <div class="parent-label">신부측</div>
-        <div class="parent-name">아버지 이○○<br>어머니 최○○</div>
+        <div class="parent-name">아버지 故김재수<br>어머니 이정연</div>
       </div>
     </div>
-  </div>
-
-  <div class="section-sep"></div>
-
-  <div class="section-title">OUR STORY</div>
-  <div class="video-wrap">
-    <div class="play-ring"></div>
-    <div class="video-label">인사 영상을 넣어주세요</div>
   </div>
 
   <div class="section-sep"></div>
@@ -254,15 +249,28 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 const WEDDING = new Date('2026-11-01T12:30:00+09:00');
 
-setTimeout(()=>document.getElementById('introOverlay').classList.add('show'), 600);
-setTimeout(()=>endIntro(), 5500);
+const introVideo=document.getElementById('introVideo');
+let introEnded=false;
+function showNamesThenEnd(){
+  if(introEnded)return;
+  document.getElementById('introOverlay').classList.add('show');
+  document.getElementById('introDim').classList.add('show');
+  setTimeout(()=>{if(!introEnded){introEnded=true;endIntro();}},2400);
+}
+introVideo.addEventListener('ended', showNamesThenEnd);
+introVideo.addEventListener('error', showNamesThenEnd);
+setTimeout(showNamesThenEnd, 15000);
 function endIntro(){
   const i=document.getElementById('intro');
   i.classList.add('fade-out');
   document.getElementById('mainPage').style.opacity='1';
   setTimeout(()=>{i.style.display='none';},1200);
 }
-function skipIntro(){endIntro();}
+function skipIntro(){
+  introEnded=true;
+  introVideo.pause();
+  endIntro();
+}
 
 function tick(){
   const diff=WEDDING-new Date();
@@ -274,7 +282,29 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 
-const PHOTOS=Array.from({length:21},(_,i)=>null);
+const PHOTOS=[
+  'images/1_1_1.jpg',
+  'images/1_2세부-1.jpg',
+  'images/1_2세부-3.jpg',
+  'images/1_3.jpg',
+  'images/1_4색감-2.jpg',
+  'images/1_4세부-4크롭.jpg',
+  'images/1_5세부-5.jpg',
+  'images/1_6세부-6.jpg',
+  'images/1_7세부-8.jpg',
+  'images/2_1색감-6.jpg',
+  'images/2_1세부-14.jpg',
+  'images/2_2세부-15.jpg',
+  'images/2_3_1세부-19.jpg',
+  'images/2_3세부-17.jpg',
+  'images/2_4세부-16.jpg',
+  'images/2_6세부-18.jpg',
+  'images/2_7세부-20.jpg',
+  'images/3_1색감-5.jpg',
+  'images/3_1세부-11.jpg',
+  'images/3_2세부-10.jpg',
+  'images/3_4세부-12.jpg'
+];
 function buildGallery(){
   const g=document.getElementById('galleryGrid');
   g.innerHTML='';
