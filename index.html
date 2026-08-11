@@ -28,6 +28,8 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .divider-dot{width:3.5px;height:3.5px;border-radius:50%;background:#c8c0a8}
 .section-title{text-align:center;font-size:10.5px;letter-spacing:4px;color:#9a9080;margin:32px 0 16px}
 .section-sep{margin:28px 24px;height:0.5px;background:#e8e4dc}
+.hero-wrap{width:100%;margin-top:26px;container-type:inline-size;padding:0 24px}
+.hero-wrap img{width:100%;height:auto;display:block;border-radius:50% 50% 0 0 / 50cqw 50cqw 0 0}
 .names{text-align:center;padding:22px 20px 0}
 .name-kr{font-size:33px;font-weight:400;color:#3d3830;letter-spacing:6px;line-height:1.3}
 .name-en{font-size:10px;letter-spacing:6px;color:#a09880;margin-top:5px}
@@ -45,6 +47,15 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .venue-box{text-align:center;margin-top:22px;padding:0 24px}
 .venue-name{font-size:16px;color:#3d3830;letter-spacing:2px;font-weight:500}
 .venue-addr{font-size:12px;color:#a09880;margin-top:7px;line-height:2.1}
+.cal-box{margin:22px 24px 0;padding:20px 6px 16px;border:0.5px solid #e0dbd0;border-radius:10px;background:#faf9f5}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;row-gap:8px}
+.cal-dow{font-size:9.5px;color:#a09880;letter-spacing:1px;padding-bottom:6px}
+.cal-day{font-size:11.5px;color:#6a6050;padding:2px 0}
+.cal-day.empty{visibility:hidden}
+.cal-day-num{width:24px;height:24px;line-height:24px;margin:0 auto;border-radius:50%}
+.cal-day.wed .cal-day-num{background:#3d3830;color:#fdfcf9;font-weight:600}
+.cal-dday{text-align:center;margin-top:14px;padding-top:14px;border-top:0.5px solid #e0dbd0;font-size:11.5px;color:#6a6050;letter-spacing:0.5px}
+.cal-dday b{color:#3d3830;font-weight:600}
 .parents{margin:26px 24px 0;padding:20px 16px;border-top:0.5px solid #e0dbd0;border-bottom:0.5px solid #e0dbd0}
 .parents-row{display:flex;justify-content:space-between;text-align:center;gap:12px}
 .parent-side{flex:1}
@@ -65,9 +76,17 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .lb-cnt{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;min-width:48px;text-align:center}
 .lb-x{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.18);background:none;color:rgba(255,255,255,0.5);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .map-wrap{margin:0 24px;border-radius:10px;overflow:hidden;border:0.5px solid #e0dbd0}
-.map-info{background:#faf9f5;padding:16px;border-top:0.5px solid #e0dbd0}
+.map-info{background:#faf9f5;padding:18px 16px}
 .map-row{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:#6a6050;line-height:1.8;align-items:flex-start}
-.map-btn{display:block;margin:12px 24px 0;padding:13px;text-align:center;background:#3d3830;color:#fdfcf9;border-radius:8px;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;border:none;font-family:'Noto Serif KR',serif;width:calc(100% - 48px)}
+.map-sec{margin-bottom:14px}
+.map-sec:last-child{margin-bottom:0}
+.map-sec-t{font-size:12.5px;color:#3d3830;font-weight:600;letter-spacing:0.5px;margin-bottom:5px}
+.map-sec-b{font-size:12px;color:#6a6050;line-height:1.85}
+.map-note{color:#a09880;font-size:11px}
+.map-div{height:0.5px;background:#e0dbd0;margin:14px 0}
+.map-tel{color:#6a6050;text-decoration:none;border-bottom:0.5px solid #c8c0a8}
+.map-btn-row{display:flex;gap:10px;margin:12px 24px 0}
+.map-btn{flex:1;padding:13px 4px;text-align:center;background:transparent;color:#3d3830;border-radius:8px;font-size:12px;letter-spacing:0.5px;cursor:pointer;border:0.5px solid #c8c0a8;font-family:'Noto Serif KR',serif}
 .msg-sec{margin:0 24px}
 .msg-form{background:#faf9f5;border:0.5px solid #e0dbd0;border-radius:10px;padding:18px;margin-bottom:14px}
 .f-input{width:100%;border:0.5px solid #e0dbd0;border-radius:6px;padding:10px 12px;font-family:'Noto Serif KR',serif;font-size:12.5px;color:#3d3830;background:#fdfcf9;margin-bottom:8px;outline:none}
@@ -119,6 +138,8 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
     <div class="name-en">KIM NAHYEON</div>
   </div>
 
+  <div class="hero-wrap"><img src="images/1_1_1.jpg" alt="메인 사진"></div>
+
   <div class="countdown">
     <div class="cd-item"><div class="cd-num" id="cd-d">--</div><div class="cd-label">DAYS</div></div>
     <div class="cd-item"><div class="cd-num" id="cd-h">--</div><div class="cd-label">HOURS</div></div>
@@ -144,6 +165,11 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
     <div class="venue-addr">서울특별시 서초구 사평대로 108, 2층<br>지하철 9호선 신반포역 4번 출구</div>
   </div>
 
+  <div class="cal-box">
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-dday" id="calDday"></div>
+  </div>
+
   <div class="parents">
     <div class="parents-row">
       <div class="parent-side">
@@ -167,38 +193,36 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 
   <div class="section-title">LOCATION</div>
   <div class="map-wrap">
-    <svg viewBox="0 0 380 260" style="width:100%;display:block;background:#f8f7f2">
-      <rect x="0" y="66" width="380" height="22" fill="#e0dbd0"/>
-      <rect x="0" y="156" width="380" height="22" fill="#e0dbd0"/>
-      <rect x="276" y="0" width="22" height="260" fill="#e0dbd0"/>
-      <text x="14" y="62" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">신반포로</text>
-      <text x="14" y="152" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">사평대로</text>
-      <text x="302" y="250" font-family="sans-serif" font-size="10.5" fill="#a09880" font-weight="bold">반포대로</text>
-      <text x="320" y="30" font-family="sans-serif" font-size="9.5" fill="#7a7060" text-anchor="middle" font-weight="bold">신세계백화점</text>
-      <text x="320" y="44" font-family="sans-serif" font-size="8.5" fill="#9a9080" text-anchor="middle">센트럴시티 · 터미널</text>
-      <text x="320" y="200" font-family="sans-serif" font-size="9.5" fill="#7a7060" text-anchor="middle" font-weight="bold">서울성모병원</text>
-      <circle cx="80" cy="77" r="22" fill="#3d3830"/>
-      <text x="80" y="72" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">9호선</text>
-      <text x="80" y="84" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">4번출구</text>
-      <text x="80" y="108" font-family="sans-serif" font-size="10.5" fill="#3d3830" text-anchor="middle" font-weight="bold">신반포역</text>
-      <text x="80" y="122" font-family="sans-serif" font-size="8.5" fill="#6a9abf" text-anchor="middle">셔틀 7분 간격</text>
-      <circle cx="290" cy="77" r="22" fill="#3d3830"/>
-      <text x="290" y="72" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">3·7·9</text>
-      <text x="290" y="84" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">호선</text>
-      <text x="290" y="108" font-family="sans-serif" font-size="10.5" fill="#3d3830" text-anchor="middle" font-weight="bold">고속터미널역</text>
-      <text x="290" y="122" font-family="sans-serif" font-size="8.5" fill="#888070" text-anchor="middle">도보 5분</text>
-      <path d="M80,228 C66,210 56,197 56,184 C56,168 67,158 80,158 C93,158 104,168 104,184 C104,197 94,210 80,228Z" fill="#3d3830"/>
-      <circle cx="80" cy="183" r="14" fill="#fdfcf9"/>
-      <text x="80" y="242" font-family="sans-serif" font-size="11" fill="#3d3830" text-anchor="middle" font-weight="bold">더 컨벤션 반포</text>
-    </svg>
+    <img src="images/약도.jpg" alt="약도" style="width:100%;display:block">
     <div class="map-info">
-      <div class="map-row"><span>🚇</span><span><b>지하철</b><br>3·7·9호선 고속터미널역 → 도보 5분<br>9호선 신반포역 4번 출구 → 도보 5분</span></div>
-      <div class="map-row"><span>🚌</span><span><b>셔틀버스 (무료)</b><br>신반포역 4번 출구 앞 탑승 · 7분 간격<br><span style="font-size:11px;color:#a09880">※ 도보가 멀어 셔틀 이용 추천</span></span></div>
-      <div class="map-row"><span>🚗</span><span><b>자가용</b><br>서울 서초구 사평대로 108 · 건물 내 주차 가능</span></div>
-      <div class="map-row" style="margin:0"><span>🏧</span><span><b>ATM</b> · 건물 내 이용 가능</span></div>
+      <div class="map-sec">
+        <div class="map-sec-t">지하철 이용 시</div>
+        <div class="map-sec-b">9호선 신반포역 4번 출구 하차<br><span class="map-note">(반포종합운동장 방향 도보 약 7분 / 셔틀버스 수시 운행)</span></div>
+      </div>
+      <div class="map-sec">
+        <div class="map-sec-t">버스 이용 시</div>
+        <div class="map-sec-b">서초10, 서초14, 서초21, 간선버스 142 (반포종합운동장 하차)<br>서초13 (서래마을 입구 하차)</div>
+      </div>
+      <div class="map-sec">
+        <div class="map-sec-t">자가용 이용 시</div>
+        <div class="map-sec-b">내비게이션 주소 검색<br>신주소: 서울 서초구 사평대로 108<br>구주소: 서초구 반포동 107-3</div>
+      </div>
+      <div class="map-div"></div>
+      <div class="map-sec">
+        <div class="map-sec-t">주차 안내</div>
+        <div class="map-sec-b">건물 내 주차공간이 협소하오니 가급적 대중교통을 이용해 주시기 바랍니다.<br>건물 내 만차 시, 아래 공영주차장을 이용해 주세요. (도보 약 10분 거리)<br>서초구립 반포2동 공영주차장 (서초구 신반포로15길 6)</div>
+      </div>
+      <div class="map-div"></div>
+      <div class="map-sec" style="margin-bottom:0">
+        <div class="map-sec-t">더컨벤션 반포점</div>
+        <div class="map-sec-b">TEL. <a class="map-tel" href="tel:02-6243-6000">02-6243-6000</a></div>
+      </div>
     </div>
   </div>
-  <button class="map-btn" onclick="openNaver()">네이버 지도로 보기</button>
+  <div class="map-btn-row">
+    <button class="map-btn" onclick="openKakao()">카카오맵으로 보기</button>
+    <button class="map-btn" onclick="openNaver()">네이버지도로 보기</button>
+  </div>
 
   <div class="section-sep"></div>
 
@@ -234,11 +258,11 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
   <div class="pop">
     <button class="pop-x" onclick="closeAcc()">✕</button>
     <div class="pop-title">마음 전하기</div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑</div><div class="a-bank">카카오뱅크</div><div class="a-num">3333-01-2345678</div><div class="a-name">송원덕</div></div><button class="cp-btn" onclick="copyAcc('3333-01-2345678','신랑')">복사</button></div></div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 어머니</div><div class="a-bank">국민은행</div><div class="a-num">123-456-78-901234</div><div class="a-name">박○○</div></div><button class="cp-btn" onclick="copyAcc('123-456-78-901234','신랑 어머니')">복사</button></div></div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 아버지</div><div class="a-bank">신한은행</div><div class="a-num">110-234-567890</div><div class="a-name">송○○</div></div><button class="cp-btn" onclick="copyAcc('110-234-567890','신랑 아버지')">복사</button></div></div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부</div><div class="a-bank">국민은행</div><div class="a-num">646201-04-189177</div><div class="a-name">김나현</div></div><button class="cp-btn" onclick="copyAcc('646201-04-189177','신부')">복사</button></div></div>
-    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부 어머니</div><div class="a-bank">대구은행</div><div class="a-num">023-08-180199</div><div class="a-name">최○○</div></div><button class="cp-btn" onclick="copyAcc('023-08-180199','신부 어머니')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑</div><div class="a-bank">KB국민은행</div><div class="a-num">205502-04-574586</div><div class="a-name">송원덕</div></div><button class="cp-btn" onclick="copyAcc('3333-01-2345678','신랑')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 어머니</div><div class="a-bank">하나은행</div><div class="a-num">750-910097-28007</div><div class="a-name">박윤주</div></div><button class="cp-btn" onclick="copyAcc('123-456-78-901234','신랑 어머니')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신랑 아버지</div><div class="a-bank">KB국민은행</div><div class="a-num">469325-94-103209</div><div class="a-name">송용석</div></div><button class="cp-btn" onclick="copyAcc('110-234-567890','신랑 아버지')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부</div><div class="a-bank">우리은행</div><div class="a-num">1002-380-762293</div><div class="a-name">김나현</div></div><button class="cp-btn" onclick="copyAcc('646201-04-189177','신부')">복사</button></div></div>
+    <div class="a-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="a-who">신부 어머니</div><div class="a-bank">아이엠뱅크(대구은행)</div><div class="a-num">023-08-180199</div><div class="a-name">이정연</div></div><button class="cp-btn" onclick="copyAcc('023-08-180199','신부 어머니')">복사</button></div></div>
     <p style="text-align:center;font-size:11px;color:#a09880;margin-top:14px;line-height:2">두 사람의 새 출발을 응원해 주셔서<br>감사합니다</p>
   </div>
 </div>
@@ -275,16 +299,38 @@ function skipIntro(){
 
 function tick(){
   const diff=WEDDING-new Date();
-  if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  const dday=document.getElementById('calDday');
+  if(diff<=0){
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');
+    if(dday)dday.innerHTML='<b>결혼식 당일</b>입니다';
+    return;
+  }
   document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
   document.getElementById('cd-h').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
   document.getElementById('cd-m').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
   document.getElementById('cd-s').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+  if(dday)dday.innerHTML='결혼식까지 <b>'+Math.floor(diff/86400000)+'일</b> 남았습니다';
 }
 tick();setInterval(tick,1000);
 
+function buildCalendar(){
+  const grid=document.getElementById('calGrid');
+  if(!grid)return;
+  const y=WEDDING.getFullYear(), m=WEDDING.getMonth(), wDay=WEDDING.getDate();
+  const dowNames=['일','월','화','수','목','금','토'];
+  let html=dowNames.map(d=>'<div class="cal-dow">'+d+'</div>').join('');
+  const firstDow=new Date(y,m,1).getDay();
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  for(let i=0;i<firstDow;i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const isWed=d===wDay;
+    html+='<div class="cal-day'+(isWed?' wed':'')+'"><div class="cal-day-num">'+d+'</div></div>';
+  }
+  grid.innerHTML=html;
+}
+buildCalendar();
+
 const PHOTOS=[
-  'images/1_1_1.jpg',
   'images/1_2세부-1.jpg',
   'images/1_2세부-3.jpg',
   'images/1_3.jpg',
@@ -358,6 +404,7 @@ function copyAcc(num,who){
   else{var t=document.createElement('textarea');t.value=num;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast(who+' 계좌번호 복사됨');}
 }
 function openNaver(){window.open('https://map.naver.com/v5/search/더컨벤션반포','_blank');}
+function openKakao(){window.open('https://map.kakao.com/link/search/'+encodeURIComponent('더컨벤션 반포'),'_blank');}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 </script>
 </body>
