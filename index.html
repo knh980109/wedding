@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>송원덕 ♥ 김나현 결혼합니다</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+Display:wght@200&display=swap');
@@ -19,6 +19,7 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .intro-name{font-family:'Noto Serif KR',serif;font-size:39.6px;letter-spacing:6px;font-weight:400;line-height:1.8}
 .intro-amp{font-family:'Cormorant Garamond',serif;font-size:33.6px;font-style:italic;color:rgba(255,255,255,0.6);margin:4px 0}
 .intro-date{font-size:13.2px;letter-spacing:4px;color:rgba(255,255,255,0.55);margin-top:14px}
+.intro-tap{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;padding:14px 22px;border:1px solid rgba(255,255,255,0.7);border-radius:30px;background:rgba(26,24,20,0.55);color:#fdfcf9;font-size:16px;white-space:nowrap;pointer-events:none;font-family:'Noto Serif KR',serif}
 .intro-skip{position:absolute;bottom:32px;right:24px;z-index:3;font-size:16.5px;color:rgba(255,255,255,0.4);letter-spacing:2px;cursor:pointer;border:none;background:none;font-family:'Noto Serif KR',serif}
 #intro.fade-out{animation:introFade 1.2s ease forwards}
 @keyframes introFade{to{opacity:0;pointer-events:none}}
@@ -125,6 +126,7 @@ body{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-se
       <div class="intro-amp">&amp;</div>
       <div class="intro-date">2026 · 11 · 01 &nbsp;|&nbsp; 더 컨벤션 반포</div>
     </div>
+    <div class="intro-tap" id="introTap">▶ 화면을 터치하면 재생돼요</div>
     <button class="intro-skip" onclick="skipIntro()">넘기기 ›</button>
   </div>
 </div>
@@ -297,8 +299,13 @@ function tryPlayIntro(){
   if(p&&p.catch)p.catch(()=>{});
 }
 tryPlayIntro();
-['touchstart','click'].forEach(ev=>document.getElementById('intro').addEventListener(ev,()=>{if(!introStarted)tryPlayIntro();},{once:false,passive:true}));
-setTimeout(()=>{if(!introStarted)showNamesThenEnd();},4000);
+document.getElementById('intro').addEventListener('click',()=>{if(!introStarted&&!introEnded)tryPlayIntro();});
+// 자동재생이 막혀 멈춰 있으면 터치 안내 표시 (안내를 누르면 재생)
+const introTap=document.getElementById('introTap');
+introVideo.addEventListener('playing',()=>{introTap.style.display='none';});
+setTimeout(()=>{if(!introStarted&&!introEnded)introTap.style.display='block';},1200);
+// 안내를 보고 누를 시간을 충분히 준 뒤에도 시작하지 않으면 이름 화면으로 넘어감
+setTimeout(()=>{if(!introStarted)showNamesThenEnd();},10000);
 function endIntro(){
   const i=document.getElementById('intro');
   i.classList.add('fade-out');
