@@ -67,10 +67,10 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 .g-thumb:hover{opacity:0.82}
 .g-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .g-num{font-size:13.2px;color:#c0b8a8;font-family:'Cormorant Garamond',serif}
-.lb{position:fixed;inset:0;background:rgba(15,13,10,0.94);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center}
+.lb{touch-action:none;position:fixed;inset:0;background:rgba(15,13,10,0.94);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center}
 .lb.show{display:flex}
-.lb-img{width:88vw;max-width:420px;max-height:76vh;border-radius:8px;overflow:hidden;background:#1e1c18;display:flex;align-items:center;justify-content:center}
-.lb-img img{max-width:100%;max-height:76vh;width:auto;height:auto;object-fit:contain;display:block;pointer-events:none;-webkit-touch-callout:none}
+.lb-img{width:88vw;max-width:420px;max-height:76vh;border-radius:8px;background:#1e1c18;display:flex;align-items:center;justify-content:center}
+.lb-img img{transform-origin:center;will-change:transform;max-width:100%;max-height:76vh;width:auto;height:auto;object-fit:contain;display:block;pointer-events:none;-webkit-touch-callout:none}
 .lb-ph{color:#5a5248;font-size:15.6px;letter-spacing:1px;font-family:'Cormorant Garamond',serif}
 .lb-nav{display:flex;align-items:center;gap:28px;margin-top:18px}
 .lb-btn{width:42px;height:42px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.2);background:none;color:rgba(255,255,255,0.7);font-size:20.4px;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -288,24 +288,25 @@ function showNamesThenEnd(){
   document.getElementById('introDim').classList.add('show');
   setTimeout(()=>{if(!introEnded){introEnded=true;endIntro();}},2400);
 }
-let introStarted=false;
-introVideo.addEventListener('playing', ()=>{introStarted=true;});
+// 영상이 실제로 재생 중인지는 이벤트가 아니라 영상 상태로 판단 (이벤트를 놓쳐도 안전)
+function isIntroPlaying(){return !introVideo.paused&&!introVideo.ended&&introVideo.currentTime>0;}
+const introTap=document.getElementById('introTap');
+function syncIntroTap(){if(isIntroPlaying()||introEnded)introTap.style.display='none';}
+['play','playing','timeupdate'].forEach(ev=>introVideo.addEventListener(ev,syncIntroTap));
 introVideo.addEventListener('ended', showNamesThenEnd);
 introVideo.addEventListener('error', showNamesThenEnd);
 setTimeout(showNamesThenEnd, 15000);
-// 자동재생이 막히거나 재생 실패 시: 터치로 재생 시도, 그래도 안 되면 바로 이름 화면으로
+// 자동재생이 막히거나 재생 실패 시: 터치로 재생 시도
 function tryPlayIntro(){
   const p=introVideo.play();
   if(p&&p.catch)p.catch(()=>{});
 }
 tryPlayIntro();
-document.getElementById('intro').addEventListener('click',()=>{if(!introStarted&&!introEnded)tryPlayIntro();});
-// 자동재생이 막혀 멈춰 있으면 터치 안내 표시 (안내를 누르면 재생)
-const introTap=document.getElementById('introTap');
-introVideo.addEventListener('playing',()=>{introTap.style.display='none';});
-setTimeout(()=>{if(!introStarted&&!introEnded)introTap.style.display='block';},1200);
+document.getElementById('intro').addEventListener('click',()=>{if(!isIntroPlaying()&&!introEnded)tryPlayIntro();});
+// 자동재생이 막혀 멈춰 있을 때만(로딩 중이 아니라 paused 상태일 때) 터치 안내 표시
+setTimeout(()=>{if(!isIntroPlaying()&&introVideo.paused&&!introEnded)introTap.style.display='block';},1500);
 // 안내를 보고 누를 시간을 충분히 준 뒤에도 시작하지 않으면 이름 화면으로 넘어감
-setTimeout(()=>{if(!introStarted)showNamesThenEnd();},10000);
+setTimeout(()=>{if(!isIntroPlaying()&&!introVideo.ended)showNamesThenEnd();},10000);
 function endIntro(){
   const i=document.getElementById('intro');
   i.classList.add('fade-out');
@@ -398,10 +399,45 @@ function renderLb(){
   const src=PHOTOS[lbIdx];
   w.innerHTML=src?'<img src="'+src+'" alt="사진'+(lbIdx+1)+'">':`<div class="lb-ph">사진 ${lbIdx+1}</div>`;
   document.getElementById('lbCnt').textContent=(lbIdx+1)+' / '+PHOTOS.length;
+  lbS=1;lbX=0;lbY=0;
 }
-let tsX=0;
-document.getElementById('lb').addEventListener('touchstart',e=>tsX=e.touches[0].clientX,{passive:true});
-document.getElementById('lb').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsX;if(Math.abs(dx)>40)lbMove(dx<0?1:-1);});
+// 라이트박스 제스처: 두 손가락 확대/축소, 확대 중 이동, 더블탭 확대, 100%일 때 좌우 스와이프로 이전/다음
+let lbS=1,lbX=0,lbY=0;
+let g={mode:'',x0:0,y0:0,tx0:0,ty0:0,d0:0,s0:1,moved:false,lastTap:0};
+function lbApply(){const im=document.querySelector('#lbImg img');if(im)im.style.transform='translate('+lbX+'px,'+lbY+'px) scale('+lbS+')';}
+function lbReset(){lbS=1;lbX=0;lbY=0;lbApply();}
+function lbClampPan(){const m=(lbS-1)*Math.max(innerWidth,innerHeight)/2;lbX=Math.max(-m,Math.min(m,lbX));lbY=Math.max(-m,Math.min(m,lbY));if(lbS<=1){lbX=0;lbY=0;}}
+function pinchDist(t){return Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);}
+const lbEl=document.getElementById('lb');
+lbEl.addEventListener('touchstart',e=>{
+  if(e.touches.length===2){g.mode='pinch';g.d0=pinchDist(e.touches);g.s0=lbS;return;}
+  g.mode=lbS>1?'pan':'swipe';g.moved=false;
+  g.x0=e.touches[0].clientX;g.y0=e.touches[0].clientY;g.tx0=lbX;g.ty0=lbY;
+},{passive:true});
+lbEl.addEventListener('touchmove',e=>{
+  if(g.mode==='pinch'&&e.touches.length===2){
+    lbS=Math.max(1,Math.min(4,g.s0*pinchDist(e.touches)/g.d0));lbClampPan();lbApply();g.moved=true;
+  }else if(g.mode==='pan'&&e.touches.length===1){
+    lbX=g.tx0+(e.touches[0].clientX-g.x0);lbY=g.ty0+(e.touches[0].clientY-g.y0);lbClampPan();lbApply();g.moved=true;
+  }
+},{passive:true});
+lbEl.addEventListener('touchend',e=>{
+  if(e.touches.length>0){ // 손가락 하나만 남으면 이동 모드로 전환
+    if(g.mode==='pinch'){g.mode=lbS>1?'pan':'';g.x0=e.touches[0].clientX;g.y0=e.touches[0].clientY;g.tx0=lbX;g.ty0=lbY;}
+    return;
+  }
+  const t=e.changedTouches[0];
+  if(g.mode==='pinch'){if(lbS<1.05)lbReset();g.mode='';return;}
+  if(g.mode==='swipe'){
+    const dx=t.clientX-g.x0;
+    if(Math.abs(dx)>40){lbMove(dx<0?1:-1);g.mode='';return;}
+  }
+  if(!g.moved&&e.target.closest&&e.target.closest('.lb-img')){ // 더블탭: 확대 ↔ 원래대로
+    const now=Date.now();
+    if(now-g.lastTap<300){lbS=lbS>1?1:2.5;lbX=0;lbY=0;lbApply();g.lastTap=0;}else g.lastTap=now;
+  }
+  g.mode='';
+});
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('lb').classList.contains('show'))return;
   if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='ArrowRight')lbMove(1);if(e.key==='Escape')closeLb();
