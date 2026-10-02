@@ -12,7 +12,7 @@ html,body{background:#f7f5f0;font-family:'Noto Serif KR',serif;color:#3d3830;ove
 #intro{position:fixed;inset:0;z-index:999;background:#f7f5f0;display:flex;align-items:center;justify-content:center}
 .intro-inner{position:relative;width:100%;max-width:480px;height:100%;margin:0 auto;overflow:hidden;background:#1a1814;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.intro-dim{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(26,24,20,0.15) 0%,rgba(26,24,20,0.55) 100%);transition:background 1.8s ease}
+.intro-dim{pointer-events:none;position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(26,24,20,0.15) 0%,rgba(26,24,20,0.55) 100%);transition:background 1.8s ease}
 .intro-dim.show{background:linear-gradient(160deg,rgba(18,16,12,0.6) 0%,rgba(18,16,12,0.82) 100%)}
 .intro-overlay{position:relative;z-index:2;text-align:center;color:#fdfcf9;opacity:0;transition:opacity 1.2s}
 .intro-overlay.show{opacity:1}
@@ -234,7 +234,8 @@ body{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-se
   <div class="msg-sec">
     <div class="msg-form">
       <input class="f-input" id="msgName" type="text" placeholder="이름" maxlength="20"/>
-      <textarea class="f-area" id="msgText" placeholder="축하 메시지를 남겨주세요" maxlength="200"></textarea>
+      <textarea class="f-area" id="msgText" placeholder="축하 메시지를 남겨주세요" maxlength="500" oninput="document.getElementById('msgCount').textContent=this.value.length"></textarea>
+      <div style="text-align:right;font-size:10.5px;color:#a89f8e;margin:-4px 2px 10px"><span id="msgCount">0</span>/500</div>
       <button class="f-btn" onclick="submitMsg()">메시지 전하기</button>
     </div>
     <div id="msgThanks" style="display:none;text-align:center;padding:20px;font-size:13px;color:#6a6050;line-height:2.2;font-weight:300">
@@ -285,9 +286,19 @@ function showNamesThenEnd(){
   document.getElementById('introDim').classList.add('show');
   setTimeout(()=>{if(!introEnded){introEnded=true;endIntro();}},2400);
 }
+let introStarted=false;
+introVideo.addEventListener('playing', ()=>{introStarted=true;});
 introVideo.addEventListener('ended', showNamesThenEnd);
 introVideo.addEventListener('error', showNamesThenEnd);
 setTimeout(showNamesThenEnd, 15000);
+// 자동재생이 막히거나 재생 실패 시: 터치로 재생 시도, 그래도 안 되면 바로 이름 화면으로
+function tryPlayIntro(){
+  const p=introVideo.play();
+  if(p&&p.catch)p.catch(()=>{});
+}
+tryPlayIntro();
+['touchstart','click'].forEach(ev=>document.getElementById('intro').addEventListener(ev,()=>{if(!introStarted)tryPlayIntro();},{once:false,passive:true}));
+setTimeout(()=>{if(!introStarted)showNamesThenEnd();},4000);
 function endIntro(){
   const i=document.getElementById('intro');
   i.classList.add('fade-out');
